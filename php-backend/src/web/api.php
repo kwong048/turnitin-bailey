@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: application/json');
+//splits input string with '/'
 $pathInfo = explode('/', $_SERVER['PATH_INFO']);
 if (count($pathInfo) < 2) {
     echo json_encode([
@@ -9,9 +10,11 @@ if (count($pathInfo) < 2) {
 }
 $dbconn = pg_connect("host=db dbname=postgres user=postgres password=postgres");
 
+//retrieves the second element in pathinfo, so either 'users' or 'members'
 $resource = $pathInfo[1];
 switch ($resource) {
     case 'members':
+        //parameterized sql queries with postgresSQL
         $result = pg_query_params($dbconn, 'SELECT * FROM memberships', []);
         $memberships = [];
         while($membership = pg_fetch_assoc($result)) {

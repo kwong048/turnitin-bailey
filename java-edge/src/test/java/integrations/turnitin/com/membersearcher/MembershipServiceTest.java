@@ -36,6 +36,9 @@ public class MembershipServiceTest {
 
 	private User userTwo;
 
+	//Sets user contact (1, test one) with member a (instructor, 1) and user contact (2, test two) with b (student, 2)
+	//when fetchMemberships, then return membershipBackendClient.fetchMemberships(members). Upon clicking Fetch Memberships
+	//when fetchUser, then return membershipBackendClient.fetchUser(user). 
 	@BeforeEach
 	public void init() {
 		members = new MembershipList()

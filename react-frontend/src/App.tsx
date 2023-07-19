@@ -47,8 +47,9 @@ const App: FC<any> = () => {
               </thead>
               <tbody>
                   { memberships.filter(membership => !search
+                  //added toLowerCase to make email case insensitive
                     || membership.user?.name.toLowerCase().includes(search.toLowerCase())
-                    || membership.user?.email.includes(search))
+                    || membership.user?.email.toLowerCase().includes(search.toLowerCase()))
                     .map(membership => (
                       <tr key={membership.id}>
                         <td>{membership.user?.name}</td>
@@ -66,7 +67,8 @@ const App: FC<any> = () => {
         { activeMembership &&
           (
             <Modal isOpen={!!activeMembership}>
-              <ModalHeader toggle={e => closeDetailsModal}>User Details</ModalHeader>
+              {/* Changed this to properly use toggle function) */}
+              <ModalHeader toggle={closeDetailsModal}>User Details</ModalHeader>
               <ModalBody>
                 <div>
                   <p>Name: {activeMembership.user?.name}</p>
